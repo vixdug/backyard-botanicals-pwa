@@ -20,21 +20,18 @@ text-align: center;
 &:not(:first-of-type) {
   margin-top: 1rem;
 }
-
-@media screen and (min-width: 600px) {
-  align-items: center;
-  display: flex;
-  padding: 1.5rem;
-  text-align: left;
-
-  &:not(:first-of-type) {
-    margin-top: 2rem;
-  }
 }
 `
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+`
+const StyledImg = styled(Img)`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+  height: auto;
 `
 
 // const Img = styled.img`
@@ -70,7 +67,7 @@ const ProductsPage = ({ data }) => (
         <Container>
           <Product key={node.shopifyId}>
           {node.images.map(image => (
-              <Img
+              <StyledImg
                 fluid={image.localFile.childImageSharp.fluid}
                 key={image.id}
                 alt={node.title}

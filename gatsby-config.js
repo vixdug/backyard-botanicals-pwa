@@ -40,7 +40,9 @@ module.exports = {
         accessToken: `a6e72da3a1161d69e5f460ad84c0638a`
       },
     },
-    `gatsby-plugin-emotion`
+    `gatsby-plugin-emotion`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

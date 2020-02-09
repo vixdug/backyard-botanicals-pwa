@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import styled from "@emotion/styled"
+import Img from 'gatsby-image'
 
 const Container = styled.div`
   margin: 3rem auto;
@@ -36,9 +37,9 @@ const StyledLink = styled(Link)`
   color: inherit;
 `
 
-const Img = styled.img`
-  margin: 0;
-`
+// const Img = styled.img`
+//   margin: 0;
+// `
 const Wrapper = styled.div`
   @media screen and (min-width: 600px) {
     padding-left: 1.5rem;
@@ -68,8 +69,13 @@ const ProductsPage = ({ data }) => (
       {data.allShopifyProduct.edges.map(({ node }) => (
         <Container>
           <Product key={node.shopifyId}>
-            {/* Image placeholder - need gatsby-image plugin etc. */}
-            <Img/>
+          {node.images.map(image => (
+              <Img
+                fluid={image.localFile.childImageSharp.fluid}
+                key={image.id}
+                alt={node.title}
+              />
+            ))}
             <Wrapper>
               <StyledLink to={`/product/${node.handle}`}>
                 <Title>{node.title}</Title>
@@ -100,6 +106,15 @@ export const query = graphql`
           shopifyId
           description
           handle
+          images {
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 290) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
           priceRange {
             minVariantPrice {
               amount

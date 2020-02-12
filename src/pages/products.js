@@ -4,22 +4,18 @@ import Layout from "../components/layout"
 import styled from "@emotion/styled"
 import Img from 'gatsby-image'
 
-const Container = styled.div`
-  margin: 3rem auto;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const StyledListItem = styled.ul`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-left: 10px;
+  margin-right: 10px;
 `
+
 const Product = styled.article `
 border: 1px solid #e5e5e5;
 padding: 1rem;
 text-align: center;
-
-&:not(:first-of-type) {
-  margin-top: 1rem;
-}
+margin: 0 10px 0 10px;
 }
 `
 const StyledLink = styled(Link)`
@@ -44,27 +40,23 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.h2 `
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0 0 0.25rem 0;
 `
 const Price = styled.h3 `
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   margin: 0 0 0.25rem 0;
 `
 
 const Description = styled.p`
-  @media screen and (min-width: 600px) {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
+    font-size: 0.8rem;
 `
 
 const ProductsPage = ({ data }) => (
   <Layout>
     <h1>Products</h1>
-    <ul>
+    <StyledListItem>
       {data.allShopifyProduct.edges.map(({ node }) => (
-        <Container>
           <Product key={node.shopifyId}>
           {node.images.map(image => (
               <StyledImg
@@ -81,16 +73,15 @@ const ProductsPage = ({ data }) => (
               <Description>{node.description}</Description>
             </Wrapper>
           </Product>
-        {/* <li key={node.shopifyId}>
+        /* <li key={node.shopifyId}>
           <h3>
             <Link to={`/product/${node.handle}`}>{node.title}</Link>
             {" - "}${node.priceRange.minVariantPrice.amount}
           </h3>
           <p>{node.description}</p>
-        </li> */}
-        </Container>
+        </li> */
       ))}
-    </ul>
+    </StyledListItem>
   </Layout>
 )
 export default ProductsPage
